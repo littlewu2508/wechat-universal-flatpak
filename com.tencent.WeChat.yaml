@@ -50,7 +50,7 @@ modules:
   - name: libactivation
     buildsystem: simple
     build-commands:
-      - bsdtar --to-stdout -xf wechat.deb data.* | bsdtar -xf -
+      - bsdtar --to-stdout -xf wechat.rpm data.* | bsdtar -xf -
       - gcc -shared -fPIC activation.c -o libactivation.so -ldl
       - install -Dm644 libactivation.so -t $FLATPAK_DEST/lib/
       - install -Dm644 etc/.kyact etc/lsb-release-ukui -t $FLATPAK_DEST/etc/
@@ -60,7 +60,7 @@ modules:
       - type: file
         url: https://archive2.kylinos.cn/deb/kylin/production/PART-openKylin/custom/partner/openKylin/pool/all/wechat-beta_1.0.0.238_amd64.deb
         sha256: 912cfd30641ef376a680b05c6bdcb70cb3f154cb9eb6d0d3a57d23befe23b99c
-        dest-filename: wechat.deb
+        dest-filename: wechat.rpm
         x-checker-data:
           type: debian-repo
           package-name: wechat-beta
@@ -108,15 +108,15 @@ modules:
         url: https://gitlab.archlinux.org/archlinux/packaging/packages/noto-fonts-cjk/-/raw/5fd3534bf7a6e26c7506dc8f40dcd89f37d35627/70-noto-cjk.conf
         sha256: 2417ac0e6720fe8da55ee59f16e36cfe96737bc21432460a322bb0f395e3a521
 
-  - name: wechat-deb
+  - name: wechat-rpm
     buildsystem: simple
     build-commands:
       - bsdtar --to-stdout -xf wechat.deb data.* | bsdtar -xf -
       - mv opt/wechat-beta -T $FLATPAK_DEST/wechat
     sources:
       - type: file
-        url: https://archive2.kylinos.cn/deb/kylin/production/PART-V10-SP1/custom/partner/V10-SP1/pool/all/wechat-beta_1.0.0.241_amd64.deb
-        sha256: 4ffe0cda779b46ad5d76b85bdc65136c9c89add4d0bc1175a34d8b94f516c4fb
+        url: https://mirrors.opencloudos.tech/opencloudos/9.2/extras/x86_64/os/Packages/wechat-beta_1.0.0.242_amd64.rpm
+        sha256: ff97d711f3c71cbe86ef93e1d04a681af5c3e95e0188f4b411064ced2819d719
         dest-filename: wechat.deb
         only-arches: [x86_64]
         x-checker-data:
@@ -127,7 +127,7 @@ modules:
           component: all
           is-main-source: true
       - type: file
-        url: https://archive2.kylinos.cn/deb/kylin/production/PART-V10-SP1/custom/partner/V10-SP1/pool/all/wechat-beta_1.0.0.241_arm64.deb
+        url: https://mirrors.opencloudos.tech/opencloudos/9.2/extras/aarch64/os/Packages/wechat-beta_1.0.0.242_arm64.rpm
         sha256: 344365a011e746fc682d7112d435a70484044e395c04a57b74aa27676af7026f
         dest-filename: wechat.deb
         only-arches: [aarch64]
